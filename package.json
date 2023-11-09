@@ -1,20 +1,32 @@
 {
-  "name": "api",
+  "name": "vacations4you_api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "mongoose": "^8.0.0"
+    "express-fileupload": "^1.4.2",
+    "express-jwt": "^8.4.1",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.29.4",
+    "mongoose": "^8.0.0",
+    "nodemailer": "^6.9.7",
+    "swagger-ui-express": "^5.0.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "morgan": "^1.10.0",
     "nodemon": "^3.0.1"
   }
 }
