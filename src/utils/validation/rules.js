@@ -108,9 +108,7 @@ exports.destination = body("destination")
 
 exports.duration = body("duration")
   .notEmpty()
-  .withMessage("Duration should be provided!")
-  .isLength({ min: 3, max: 255 })
-  .withMessage("Duration 3 to 255 characters length.");
+  .withMessage("Duration should be provided!");
 
 exports.noOfTravelers = body("no_of_travelers")
   .notEmpty()
@@ -123,3 +121,18 @@ exports.price = body("price")
 exports.specialty = body("price")
   .notEmpty()
   .withMessage("Specialty should be provided!");
+
+exports.titleOptional = body("title")
+  .isLength({ min: 3, max: 255 })
+  .withMessage("Title 3 to 255 characters length.")
+  .optional()
+
+exports.descriptionOptional = body("description")
+  .isLength({ min: 3, })
+  .withMessage("Description minimum 3 characters length.")
+  .optional()
+
+exports.destinationOptional = body("destination")
+  .isLength({ min: 3, max: 255 })
+  .withMessage("Destination 3 to 255 characters length.")
+  .optional()

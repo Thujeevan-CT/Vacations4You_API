@@ -1,11 +1,15 @@
 const {
+  id,
   title,
   description,
   destination,
   duration,
   noOfTravelers,
   price,
-  specialty
+  specialty,
+  titleOptional,
+  descriptionOptional,
+  destinationOptional
 } = require('../rules');
 
 exports.newPackage = [
@@ -16,4 +20,15 @@ exports.newPackage = [
   noOfTravelers,
   price,
   specialty
+];
+
+exports.updatePackage = [
+  id,
+  titleOptional,
+  descriptionOptional,
+  destinationOptional
+];
+
+exports.getSinglePackage = [
+  id
 ];

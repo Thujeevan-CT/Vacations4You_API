@@ -1,11 +1,11 @@
-import fs from "fs";
-import path from "path";
-import { randomBytes } from "crypto";
-import DIR_PATH from "../../../config";
+const fs = require("fs");
+const path = require("path");
+const { randomBytes } = require("crypto");
+const DIR_PATH = ("../../../config");
 
 const MAX_FILE_SIZE_BYTES = 2 * 1024 * 1024; // 2MB in bytes
 
-export default class FileUpload {
+module.exports = class FileUpload {
   constructor(
     req,
     imagePath = "",

@@ -15,7 +15,7 @@ module.exports = {
   ],
   paths: {
     ...authDoc,
-    // ...packageDoc,
+    ...packageDoc,
   },
   components: {
     securitySchemes: {

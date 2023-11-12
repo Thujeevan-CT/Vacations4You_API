@@ -1,14 +1,17 @@
 require('dotenv/config')
 const express = require('express');
 const cors = require('cors');
-const morgan = require("morgan");
-const { connectDatabase } = require("./src/database");
+const morgan = require('morgan');
+const { connectDatabase } = require('./src/database');
+const fileUpload = require('express-fileupload');
 
 const app = express();
 
 app.use(cors());
 app.options('*', cors());
+app.use(fileUpload());
 app.use(express.json({ limit: "3mb" }));
+app.use("/assets", express.static("assets"));
 app.use(morgan("tiny"));
 app.use(connectDatabase);
 
