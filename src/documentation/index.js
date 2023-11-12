@@ -1,4 +1,5 @@
 const authDoc = require('./auth');
+const packageDoc = require('./package');
 
 module.exports = {
   openapi: '3.0.3',
@@ -14,6 +15,7 @@ module.exports = {
   ],
   paths: {
     ...authDoc,
+    // ...packageDoc,
   },
   components: {
     securitySchemes: {

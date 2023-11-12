@@ -31,81 +31,45 @@ module.exports = {
       tags: ["Auth"],
       summary: "Invite user",
       description: "Invite user",
-      parameters: [
-        {
-          "name": "first_name",
-          "in": "query",
-          "description": "first name",
-          "required": true,
-          "schema": {
-            "type": "string",
-            "format": "first name"
-          }
+      requestBody: {
+        content: {
+          "application/json": {
+            schema: {
+              type: 'object',
+              properties: {
+                first_name: {
+                  type: "string(50)",
+                  default: "John",
+                },
+                last_name: {
+                  type: "string(50)",
+                  default: "doe",
+                },
+                email: {
+                  type: "string(50)",
+                  default: "admin@vacation4u.com",
+                },
+                confirm_email: {
+                  type: "string(50)",
+                  default: "admin@vacation4u.com",
+                },
+                password: {
+                  type: "string(50)",
+                  default: "123456Abc",
+                },
+                confirm_password: {
+                  type: "string(50)",
+                  default: "Abc123123",
+                },
+                role: {
+                  type: "string(50)",
+                  default: "agent",
+                },
+              },
+            },
+          },
         },
-        {
-          "name": "last_name",
-          "in": "query",
-          "description": "last name",
-          "required": true,
-          "schema": {
-            "type": "string",
-            "format": "last name"
-          }
-        },
-        {
-          "name": "email",
-          "in": "query",
-          "description": "email",
-          "required": true,
-          "schema": {
-            "type": "string",
-            "format": "email"
-          }
-        },
-        {
-          "name": "confirm_email",
-          "in": "query",
-          "description": "confirm email",
-          "required": true,
-          "schema": {
-            "type": "string",
-            "format": "email"
-          }
-        },
-        {
-          "name": "password",
-          "in": "query",
-          "description": "password",
-          "required": true,
-          "schema": {
-            "type": "string",
-            "format": "password"
-          }
-        },
-        {
-          "name": "confirm_password",
-          "in": "query",
-          "description": "confirm password",
-          "required": true,
-          "schema": {
-            "type": "string",
-            "format": "password"
-          }
-        },
-        {
-          name: "role",
-          in: "query",
-          description: "user role",
-          required: false,
-          schema: {
-            type: "string",
-            enum: [
-              'staff',
-              'agent'
-            ]
-          }
-        }
-      ],
+      },
       responses: {
         200: {
           description: "user invited successfully",
@@ -127,28 +91,25 @@ module.exports = {
       tags: ["Auth"],
       summary: "User login",
       description: "Login user",
-      parameters: [
-        {
-          "name": "email",
-          "in": "query",
-          "description": "email",
-          "required": true,
-          "schema": {
-            "type": "string",
-            "format": "email"
-          }
+      requestBody: {
+        content: {
+          "application/json": {
+            schema: {
+              type: 'object',
+              properties: {
+                email: {
+                  type: "string(50)",
+                  default: "admin@vacation4u.com",
+                },
+                password: {
+                  type: "string(50)",
+                  default: "123456Abc",
+                },
+              },
+            },
+          },
         },
-        {
-          "name": "password",
-          "in": "query",
-          "description": "password",
-          "required": true,
-          "schema": {
-            "type": "string",
-            "format": "password"
-          }
-        }
-      ],
+      },
       responses: {
         200: {
           description: "user logged in successfully",
@@ -170,18 +131,21 @@ module.exports = {
       tags: ["Auth"],
       summary: "Get token for password reset session",
       description: "Get token for password reset session",
-      parameters: [
-        {
-          "name": "email",
-          "in": "query",
-          "description": "email",
-          "required": true,
-          "schema": {
-            "type": "string",
-            "format": "email"
-          }
-        }
-      ],
+      requestBody: {
+        content: {
+          "application/json": {
+            schema: {
+              type: 'object',
+              properties: {
+                email: {
+                  type: "string(50)",
+                  default: "admin@vacation4u.com",
+                }
+              },
+            },
+          },
+        },
+      },
       responses: {
         200: {
           description: "Get token link successfully",
@@ -215,38 +179,31 @@ module.exports = {
           description: "user id",
           required: true,
           type: "string",
-        },
-        {
-          name: "old_password",
-          in: "query",
-          description: "old password",
-          required: true,
-          schema: {
-            type: "string",
-            format: "password"
-          }
-        },
-        {
-          name: "new_password",
-          in: "query",
-          description: "new password",
-          required: true,
-          schema: {
-            type: "string",
-            format: "password"
-          }
-        },
-        {
-          name: "confirm_password",
-          in: "query",
-          description: "confirm password",
-          required: true,
-          schema: {
-            type: "string",
-            format: "password"
-          }
-        },
+        }
       ],
+      requestBody: {
+        content: {
+          "application/json": {
+            schema: {
+              type: 'object',
+              properties: {
+                old_password: {
+                  type: "string(50)",
+                  default: "123456Abc",
+                },
+                new_password: {
+                  type: "string(50)",
+                  default: "Abc123123",
+                },
+                confirm_password: {
+                  type: "string(50)",
+                  default: "Abc123123",
+                },
+              },
+            },
+          },
+        },
+      },
       responses: {
         200: {
           description: "user password changed successfully",
@@ -268,38 +225,29 @@ module.exports = {
       tags: ["Auth"],
       summary: "User reset password",
       description: "User reset password",
-      parameters: [
-        {
-          name: "token",
-          in: "query",
-          description: "token",
-          required: true,
-          schema: {
-            type: "string",
-            format: "token"
-          }
+      requestBody: {
+        content: {
+          "application/json": {
+            schema: {
+              type: 'object',
+              properties: {
+                token: {
+                  type: "string(50)",
+                  default: "token",
+                },
+                new_password: {
+                  type: "string(50)",
+                  default: "Abc123123",
+                },
+                confirm_password: {
+                  type: "string(50)",
+                  default: "Abc123123",
+                },
+              },
+            },
+          },
         },
-        {
-          name: "new_password",
-          in: "query",
-          description: "new password",
-          required: true,
-          schema: {
-            type: "string",
-            format: "password"
-          }
-        },
-        {
-          name: "confirm_password",
-          in: "query",
-          description: "confirm password",
-          required: true,
-          schema: {
-            type: "string",
-            format: "password"
-          }
-        },
-      ],
+      },
       responses: {
         200: {
           description: "user verified successfully",

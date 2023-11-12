@@ -59,7 +59,7 @@ router.get('/refresh-token', async (req, res) => {
 
 router.post('/register', validate(authValidation.register), async (req, res) => {
   try {
-    const { first_name, last_name, email, password, role } = req.query;
+    const { first_name, last_name, email, password, role } = req.body;
 
     const user = await User.findOne({ email: email.toLowerCase() });
     if (user) {
@@ -84,7 +84,7 @@ router.post('/register', validate(authValidation.register), async (req, res) => 
 
 router.post('/login', validate(authValidation.login), async (req, res) => {
   try {
-    const { email, password } = req.query;
+    const { email, password } = req.body;
     const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
       return responseHandler.notFoundError(res, "Your password or email is incorrect!");
@@ -122,7 +122,7 @@ router.post('/login', validate(authValidation.login), async (req, res) => {
 
 router.post('/forgot-password', validate(authValidation.forgotPassword), async (req, res) => {
   try {
-    const { email } = req.query;
+    const { email } = req.body;
     const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
       return responseHandler.notFoundError(res, "Email is invalid!");
@@ -184,7 +184,7 @@ router.put('/change-password/:id', middleware.authRole(['admin', 'staff', 'agent
   try {
     const user_id_jwt = req.userId;
     const user_id = req.params.id;
-    const { old_password, new_password } = req.query;
+    const { old_password, new_password } = req.body;
 
     if (old_password === new_password) {
       return responseHandler.validationError(res, "Old password and new password are same!");
@@ -234,7 +234,7 @@ router.put('/change-password/:id', middleware.authRole(['admin', 'staff', 'agent
 
 router.put('/reset-password', validate(authValidation.resetPassword), async (req, res) => {
   try {
-    const { token, new_password } = req.query;
+    const { token, new_password } = req.body;
 
     jwt.verify(token, process.env.RESET_PASSWORD_SECRET, async (err, payload) => {
       if (err) {

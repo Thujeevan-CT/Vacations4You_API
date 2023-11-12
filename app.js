@@ -15,6 +15,8 @@ app.use(connectDatabase);
 // Routes
 const authRoute = require('./src/routes/auth');
 app.use('/api/v1/auth', authRoute);
+const holidayPackRoute = require('./src/routes/holiday');
+app.use('/api/v1/package', holidayPackRoute);
 
 // Swagger API Documentation
 const swaggerUi = require("swagger-ui-express");
