@@ -59,7 +59,6 @@ module.exports = (roles = [], publicApi= false) => {
             req.isAdmin = userRole === 'admin';
             req.isAgent = userRole === 'agent';
             req.isStaff = userRole === 'staff';
-            req.userRole = userRole;
             req.userId = user._id;
             next();
           } catch (error) {

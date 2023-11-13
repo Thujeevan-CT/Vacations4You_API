@@ -1,5 +1,7 @@
 const authDoc = require('./auth');
 const packageDoc = require('./package');
+const activityDoc = require('./activity');
+const cruiseDoc = require('./cruise');
 
 module.exports = {
   openapi: '3.0.3',
@@ -16,6 +18,8 @@ module.exports = {
   paths: {
     ...authDoc,
     ...packageDoc,
+    ...activityDoc, 
+    ...cruiseDoc, 
   },
   components: {
     securitySchemes: {

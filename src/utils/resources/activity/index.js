@@ -1,33 +1,25 @@
-exports.packageResponse = (data) => {
+exports.activityResponse = (data) => {
   return {
     id: data._id,
-    title: data.title,
-    description: data.description,
+    activity_type: data.activity_type,
     destination: data.destination,
-    duration: data.duration,
-    no_of_travelers: data.no_of_travelers,
     image: data.image,
     price: data.price,
-    specialty: data.specialty,
     rating: data.rating,
     status: data.status,
   };
 };
 
-exports.allPackagesResponse = (data) => {
+exports.allActivitiesResponse = (data) => {
   let response = [];
 
   data.map((data) => {
     response.push({
       id: data._id,
-      title: data.title,
-      description: data.description,
+      activity_type: data.activity_type,
       destination: data.destination,
-      duration: data.duration,
-      no_of_travelers: data.no_of_travelers,
       image: data.image,
       price: data.price,
-      specialty: data.specialty,
       rating: data.rating,
       status: data.status,
     });

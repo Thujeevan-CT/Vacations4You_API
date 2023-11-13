@@ -2,29 +2,17 @@ const mongoose = require("mongoose");
 const { v4: uuidv4 } = require("uuid");
 const moment = require('moment');
 
-const holidayPackageSchema = new mongoose.Schema({
+const activityReservationsSchema = new mongoose.Schema({
   _id: {
     type: String,
     default: uuidv4,
   },
-  title: {
-    type: String,
-    required: true,
-  },
-  description: {
+  activity_type: {
     type: String,
     required: true,
   },
   destination: {
     type: String,
-    required: true,
-  },
-  duration: {
-    type: String,
-    required: true,
-  },
-  no_of_travelers: {
-    type: Number,
     required: true,
   },
   image: {
@@ -33,10 +21,6 @@ const holidayPackageSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-    required: true,
-  },
-  specialty: {
-    type: String,
     required: true,
   },
   rating: {
@@ -59,10 +43,10 @@ const holidayPackageSchema = new mongoose.Schema({
   },
 }, { versionKey: false });
 
-holidayPackageSchema.pre('findOneAndUpdate', function() {
+activityReservationsSchema.pre('findOneAndUpdate', function() {
   this.set({ updated_at: moment.utc().format() });
 });
 
-const HolidayPackage = mongoose.model('holiday-package', holidayPackageSchema);
+const ActivityReservations = mongoose.model('activity-reservations', activityReservationsSchema);
 
-module.exports = HolidayPackage;
+module.exports = ActivityReservations;

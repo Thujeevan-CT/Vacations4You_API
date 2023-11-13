@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { v4: uuidv4 } = require("uuid");
 const moment = require('moment');
 
-const holidayPackageSchema = new mongoose.Schema({
+const cruiseReservationsSchema = new mongoose.Schema({
   _id: {
     type: String,
     default: uuidv4,
@@ -11,20 +11,12 @@ const holidayPackageSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description: {
+  cruise_duration: {
     type: String,
     required: true,
   },
-  destination: {
+  cruise_provider: {
     type: String,
-    required: true,
-  },
-  duration: {
-    type: String,
-    required: true,
-  },
-  no_of_travelers: {
-    type: Number,
     required: true,
   },
   image: {
@@ -34,15 +26,6 @@ const holidayPackageSchema = new mongoose.Schema({
   price: {
     type: Number,
     required: true,
-  },
-  specialty: {
-    type: String,
-    required: true,
-  },
-  rating: {
-    type: Number,
-    required: false,
-    default: 4,
   },
   status: {
     type: String,
@@ -59,10 +42,10 @@ const holidayPackageSchema = new mongoose.Schema({
   },
 }, { versionKey: false });
 
-holidayPackageSchema.pre('findOneAndUpdate', function() {
+cruiseReservationsSchema.pre('findOneAndUpdate', function() {
   this.set({ updated_at: moment.utc().format() });
 });
 
-const HolidayPackage = mongoose.model('holiday-package', holidayPackageSchema);
+const CruiseReservations = mongoose.model('cruise-reservation', cruiseReservationsSchema);
 
-module.exports = HolidayPackage;
+module.exports = CruiseReservations;

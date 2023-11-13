@@ -10,7 +10,8 @@ const {
   oldPassword,
   confirmNewPassword,
   token,
-  role
+  role,
+  passwordOptional
 } = require('../rules');
 
 exports.register = [
@@ -25,7 +26,7 @@ exports.register = [
 
 exports.login = [
   email,
-  password
+  passwordOptional
 ];
 
 exports.changePassword = [

@@ -55,10 +55,10 @@ router.post('/new', middleware.authRole(['admin', 'staff']), validate(packageVal
 
     const alreadyHaveTitle = await Holiday.findOne({ title: title });
     if(alreadyHaveTitle) {
-      return responseHandler.validationError(res, 'Title already stored!');
+      return responseHandler.validationError(res, 'Title already have!');
     }
 
-    const uploadAvatar = new FileUpload(req, "assets/images", "image", false);
+    const uploadAvatar = new FileUpload(req, "assets/images/holiday-packages", "image", false);
     const fileNotValid = uploadAvatar.validate();
     if (fileNotValid) {
       return responseHandler.frontError(res, fileNotValid);

@@ -42,6 +42,10 @@ exports.password = body("password")
   .isLength({ min: 6, max: 120 })
   .withMessage("Password 6 to 120 characters length.");
 
+exports.passwordOptional = body("password")
+  .notEmpty()
+  .withMessage("Password should be provided!");
+
 exports.confirmPassword = body("confirm_password")
   .notEmpty()
   .withMessage("Confirm Password should be provided!")
@@ -116,7 +120,7 @@ exports.noOfTravelers = body("no_of_travelers")
 
 exports.price = body("price")
   .notEmpty()
-  .withMessage("Price should be provided!");
+  .withMessage("Price should be provided!")
 
 exports.specialty = body("price")
   .notEmpty()
@@ -135,4 +139,30 @@ exports.descriptionOptional = body("description")
 exports.destinationOptional = body("destination")
   .isLength({ min: 3, max: 255 })
   .withMessage("Destination 3 to 255 characters length.")
+  .optional();
+
+exports.activityType = body("activity_type")
+  .notEmpty()
+  .withMessage("Activity type should be provided!")
+  .isLength({ min: 3, max: 255 })
+  .withMessage("Activity type 3 to 255 characters length.");
+
+exports.activityTypeOptional = body("activity_type")
+  .isLength({ min: 3, max: 255 })
+  .withMessage("Activity type 3 to 255 characters length.")
+  .optional();
+
+exports.cruiseDuration = body("cruise_duration")
+  .notEmpty()
+  .withMessage("Cruise duration should be provided!")
+
+exports.cruiseProvider = body("cruise_provider")
+  .notEmpty()
+  .withMessage("Cruise provider should be provided!")
+  .isLength({ min: 3, max: 255 })
+  .withMessage("Cruise provider 3 to 255 characters length.");
+
+exports.cruiseProviderOptional = body("cruise_provider")
+  .isLength({ min: 3, max: 255 })
+  .withMessage("Cruise provider 3 to 255 characters length.")
   .optional()
