@@ -5,18 +5,26 @@ const {
   price,
   activityTypeOptional,
   destinationOptional,
+  date,
+  dateOptional,
+  ageRestriction,
+  ageRestrictionOptional
 } = require('../rules');
 
 exports.newActivity = [
   activityType,
   destination,
-  price
+  price,
+  date,
+  ageRestriction
 ];
 
 exports.updateActivity = [
   id,
   activityTypeOptional,
   destinationOptional,
+  dateOptional,
+  ageRestrictionOptional
 ];
 
 exports.getSingleActivity = [

@@ -112,15 +112,19 @@ exports.destination = body("destination")
 
 exports.duration = body("duration")
   .notEmpty()
-  .withMessage("Duration should be provided!");
+  .withMessage("Duration should be provided!")
 
 exports.noOfTravelers = body("no_of_travelers")
   .notEmpty()
-  .withMessage("No of travelers should be provided!");
+  .withMessage("No of travelers should be provided!")
+  .isInt()
+  .withMessage('Price must be a number!')
 
 exports.price = body("price")
   .notEmpty()
   .withMessage("Price should be provided!")
+  .isInt()
+  .withMessage('Price must be a number!')
 
 exports.specialty = body("price")
   .notEmpty()
@@ -165,4 +169,81 @@ exports.cruiseProvider = body("cruise_provider")
 exports.cruiseProviderOptional = body("cruise_provider")
   .isLength({ min: 3, max: 255 })
   .withMessage("Cruise provider 3 to 255 characters length.")
-  .optional()
+  .optional();
+
+exports.departureDestination = body("departure_destination")
+  .notEmpty()
+  .withMessage("Departure destination should be provided!")
+  .isLength({ min: 3, max: 255 })
+  .withMessage("Departure destination 3 to 255 characters length.");
+
+exports.arrivalDestination = body("arrival_destination")
+  .notEmpty()
+  .withMessage("Arrival destination should be provided!")
+  .isLength({ min: 3, max: 255 })
+  .withMessage("Arrival destination 3 to 255 characters length.");
+  
+exports.departureDate = body("departure_date")
+  .notEmpty()
+  .withMessage("Departure date should be provided!")
+  .isInt()
+  .withMessage('Departure date must be a Unix timestamp!');
+
+exports.arrivalDate = body("arrival_date")
+  .notEmpty()
+  .withMessage("Arrival date should be provided!")
+  .isInt()
+  .withMessage('Arrival date must be a Unix timestamp!');
+
+exports.departureDestinationOptional = body("departure_destination")
+  .isLength({ min: 3, max: 255 })
+  .withMessage("Departure destination 3 to 255 characters length.")
+  .optional();
+
+exports.arrivalDestinationOptional = body("arrival_destination")
+  .isLength({ min: 3, max: 255 })
+  .withMessage("Arrival destination 3 to 255 characters length.")
+  .optional();
+  
+exports.departureDateOptional = body("departure_date")
+  .isInt()
+  .withMessage('Departure date must be a Unix timestamp!')
+  .optional();
+
+exports.arrivalDateOptional = body("arrival_date")
+  .isInt()
+  .withMessage('Arrival date must be a Unix timestamp!')
+  .optional();
+
+exports.cabinClass = body("cabin_class")
+  .notEmpty()
+  .withMessage("Arrival date should be provided!")
+  .isInt()
+  .withMessage('Cabin class must be a number!');
+
+exports.cabinClassOptional = body("cabin_class")
+  .isInt()
+  .withMessage('Cabin class must be a number!')
+  .optional();
+
+exports.date = body("date")
+  .notEmpty()
+  .withMessage("Date should be provided!")
+  .isInt()
+  .withMessage('Date must be a Unix timestamp!');
+
+exports.dateOptional = body("date")
+  .isInt()
+  .withMessage('Date must be a Unix timestamp!')
+  .optional();
+
+exports.ageRestriction = body("age_restriction")
+  .notEmpty()
+  .withMessage("Age restriction should be provided!")
+  .isInt()
+  .withMessage('Age is a number!');
+
+exports.ageRestrictionOptional = body("age_restriction")
+  .isInt()
+  .withMessage('Age is a number!')
+  .optional();

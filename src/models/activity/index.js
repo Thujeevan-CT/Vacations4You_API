@@ -15,6 +15,10 @@ const activityReservationsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  date: {
+    type: Number,
+    required: true,
+  },
   image: {
     type: String,
     default: "",
@@ -27,6 +31,10 @@ const activityReservationsSchema = new mongoose.Schema({
     type: Number,
     required: false,
     default: 4,
+  },
+  age_restriction: {
+    type: Number,
+    required: false,
   },
   status: {
     type: String,

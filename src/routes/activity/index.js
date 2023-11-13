@@ -7,16 +7,24 @@ const validate = require('../../utils/validation');
 const middleware = require("../../middleware");
 const { activityResponse, allActivitiesResponse } = require('../../utils/resources/activity');
 const FileUpload = require('../../utils/fileUpload');
+const { getRandomNumber } = require('../../utils/helpers');
 
 router.get('/', middleware.authRole(['admin', 'staff', 'agent']), async (req, res) => {
   try {
-    let activities;
-    if (req.isAgent) {
-      activities = await Activity.find({ status: 'active' });
-    } else {
-      activities = await Activity.find();
-    }
+    const { price, rating } = req.query;
+    const whereCondition = {};
 
+    if (req.isAgent) {
+      whereCondition.status = 'active';
+    }
+    if (price) {
+      whereCondition.price = price;
+    }
+    if (rating) {
+      whereCondition.rating = rating;
+    }
+    
+    const activities = await Activity.find(whereCondition);
     if (!activities) {
       return responseHandler.error(res, 'Activities not found!');
     };
@@ -51,7 +59,7 @@ router.get('/:id', middleware.authRole(['admin', 'staff', 'agent']), validate(ac
 
 router.post('/new', middleware.authRole(['admin', 'staff']), validate(activityValidation.newActivity), async (req, res) => {
   try {
-    const { activity_type, destination, price } = req.body;
+    const { activity_type, destination, price, date, age_restriction } = req.body;
 
     const alreadyHaveTitle = await Activity.findOne({ activity_type: activity_type });
     if(alreadyHaveTitle) {
@@ -68,7 +76,10 @@ router.post('/new', middleware.authRole(['admin', 'staff']), validate(activityVa
     const newActivity = Activity({
       activity_type,
       destination,
+      date,
       price,
+      age_restriction,
+      rating: getRandomNumber(),
       ...uploadedAvatar
     });
 

@@ -5,7 +5,17 @@ const {
   price,
   cruiseDuration,
   cruiseProvider,
-  cruiseProviderOptional
+  cruiseProviderOptional,
+  departureDestination,
+  arrivalDestination,
+  departureDate,
+  arrivalDate,
+  departureDestinationOptional,
+  arrivalDestinationOptional,
+  departureDateOptional,
+  arrivalDateOptional,
+  cabinClass,
+  cabinClassOptional
 } = require('../rules');
 
 exports.newCruise = [
@@ -13,12 +23,22 @@ exports.newCruise = [
   price,
   cruiseDuration,
   cruiseProvider,
+  departureDestination,
+  arrivalDestination,
+  departureDate,
+  arrivalDate,
+  cabinClass
 ];
 
 exports.updateCruise = [
   id,
   titleOptional,
-  cruiseProviderOptional
+  cruiseProviderOptional,
+  departureDestinationOptional,
+  arrivalDestinationOptional,
+  departureDateOptional,
+  arrivalDateOptional,
+  cabinClassOptional
 ];
 
 exports.getSingleCruise = [

@@ -7,15 +7,27 @@ const validate = require('../../utils/validation');
 const middleware = require("../../middleware");
 const { packageResponse, allPackagesResponse } = require('../../utils/resources/package');
 const FileUpload = require('../../utils/fileUpload');
+const { getRandomNumber } = require('../../utils/helpers');
 
 router.get('/', middleware.authRole(['admin', 'staff', 'agent']), async (req, res) => {
   try {
-    let packages;
+    const { price, rating, duration } = req.query;
+    const whereCondition = {};
+
     if (req.isAgent) {
-      packages = await Holiday.find({ status: 'active' });
-    } else {
-      packages = await Holiday.find();
+      whereCondition.status = 'active';
     }
+    if (price) {
+      whereCondition.price = price;
+    }
+    if (rating) {
+      whereCondition.rating = rating;
+    }
+    if (duration) {
+      whereCondition.duration = duration;
+    }
+    
+    const activities = await Holiday.find(whereCondition);
 
     if (!packages) {
       return responseHandler.error(res, 'Packages not found!');
@@ -73,6 +85,7 @@ router.post('/new', middleware.authRole(['admin', 'staff']), validate(packageVal
       no_of_travelers,
       price,
       specialty,
+      rating: getRandomNumber(),
       ...uploadedAvatar
     });
 

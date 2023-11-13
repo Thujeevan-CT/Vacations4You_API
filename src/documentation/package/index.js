@@ -75,6 +75,26 @@ module.exports = {
       tags: ["Package"],
       summary: "Get all Package's",
       description: "Get all Package's",
+      parameters: [
+        {
+          name: "price",
+          in: "query",
+          description: "price",
+          type: "string",
+        },
+        {
+          name: "rating",
+          in: "query",
+          description: "rating",
+          type: "string",
+        },
+        {
+          name: "duration",
+          in: "query",
+          description: "duration",
+          type: "string",
+        },
+      ],
       responses: {
         200: {
           description: "Package's successfully retrieved.",
