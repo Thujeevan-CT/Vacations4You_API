@@ -24,6 +24,14 @@ module.exports = {
                   type: "string(50)",
                   default: "destination",
                 },
+                date: {
+                  type: "string(50)",
+                  default: "unix timestamp format",
+                },
+                age_restriction: {
+                  type: "string(50)",
+                  default: "number",
+                },
                 price: {
                   type: "string(50)",
                   default: "90",
@@ -59,6 +67,20 @@ module.exports = {
       tags: ["Activity"],
       summary: "Get all activity's",
       description: "Get all activity's",
+      parameters: [
+        {
+          name: "price",
+          in: "query",
+          description: "price",
+          type: "string",
+        },
+        {
+          name: "rating",
+          in: "query",
+          description: "rating",
+          type: "string",
+        },
+      ],
       responses: {
         200: {
           description: "Activity's successfully retrieved.",
@@ -142,6 +164,14 @@ module.exports = {
                 destination: {
                   type: "string(50)",
                   default: "destination",
+                },
+                date: {
+                  type: "string(50)",
+                  default: "unix timestamp format",
+                },
+                age_restriction: {
+                  type: "string(50)",
+                  default: "number",
                 },
                 price: {
                   type: "string(50)",
