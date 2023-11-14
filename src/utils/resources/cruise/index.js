@@ -1,3 +1,5 @@
+const tz = require('moment-timezone');
+
 exports.cruiseResponse = (data) => {
   const departureDate = {
     date: tz.unix(data.departure_date).tz('Asia/Kolkata').format('DD/MM/YYYY'),
