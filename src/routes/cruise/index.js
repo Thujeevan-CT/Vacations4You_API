@@ -48,7 +48,6 @@ router.get('/', middleware.authRole(['admin', 'staff', 'agent']), async (req, re
     }
     
     const cruises = await Cruise.find(whereCondition);
-
     if (!cruises) {
       return responseHandler.error(res, 'Cruises not found!');
     };
