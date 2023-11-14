@@ -64,7 +64,7 @@ module.exports = {
                 },
                 cabin_class: {
                   type: "string(50)",
-                  default: "Class number",
+                  default: "String",
                 },
                 cruise_duration: {
                   type: "string(50)",
@@ -227,7 +227,7 @@ module.exports = {
                 },
                 cabin_class: {
                   type: "string(50)",
-                  default: "Class number",
+                  default: "String",
                 },
                 cruise_duration: {
                   type: "string(50)",

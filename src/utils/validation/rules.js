@@ -209,13 +209,9 @@ exports.arrivalDateOptional = body("arrival_date")
 
 exports.cabinClass = body("cabin_class")
   .notEmpty()
-  .withMessage("Arrival date should be provided!")
-  .isInt()
-  .withMessage('Cabin class must be a number!');
+  .withMessage("Cabin class should be provided!");
 
 exports.cabinClassOptional = body("cabin_class")
-  .isInt()
-  .withMessage('Cabin class must be a number!')
   .optional();
 
 exports.date = body("date")
