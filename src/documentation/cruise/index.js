@@ -56,11 +56,11 @@ module.exports = {
                 },
                 departure_date: {
                   type: "string(50)",
-                  default: "departure date timestamp",
+                  default: "String format",
                 },
                 arrival_date: {
                   type: "string(50)",
-                  default: "arrival date timestamp",
+                  default: "String format",
                 },
                 cabin_class: {
                   type: "string(50)",

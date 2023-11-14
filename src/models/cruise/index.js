@@ -20,11 +20,11 @@ const cruiseReservationsSchema = new mongoose.Schema({
     required: true,
   },
   departure_date: {
-    type: Number,
+    type: String,
     required: true,
   },
   arrival_date: {
-    type: Number,
+    type: String,
     required: true,
   },
   cabin_class: {

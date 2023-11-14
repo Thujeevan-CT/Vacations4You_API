@@ -185,15 +185,11 @@ exports.arrivalDestination = body("arrival_destination")
   
 exports.departureDate = body("departure_date")
   .notEmpty()
-  .withMessage("Departure date should be provided!")
-  .isInt()
-  .withMessage('Departure date must be a Unix timestamp!');
+  .withMessage("Departure date should be provided!");
 
 exports.arrivalDate = body("arrival_date")
   .notEmpty()
-  .withMessage("Arrival date should be provided!")
-  .isInt()
-  .withMessage('Arrival date must be a Unix timestamp!');
+  .withMessage("Arrival date should be provided!");
 
 exports.departureDestinationOptional = body("departure_destination")
   .isLength({ min: 3, max: 255 })
@@ -206,13 +202,9 @@ exports.arrivalDestinationOptional = body("arrival_destination")
   .optional();
   
 exports.departureDateOptional = body("departure_date")
-  .isInt()
-  .withMessage('Departure date must be a Unix timestamp!')
   .optional();
 
 exports.arrivalDateOptional = body("arrival_date")
-  .isInt()
-  .withMessage('Arrival date must be a Unix timestamp!')
   .optional();
 
 exports.cabinClass = body("cabin_class")
@@ -228,13 +220,9 @@ exports.cabinClassOptional = body("cabin_class")
 
 exports.date = body("date")
   .notEmpty()
-  .withMessage("Date should be provided!")
-  .isInt()
-  .withMessage('Date must be a Unix timestamp!');
+  .withMessage("Date should be provided!");
 
 exports.dateOptional = body("date")
-  .isInt()
-  .withMessage('Date must be a Unix timestamp!')
   .optional();
 
 exports.ageRestriction = body("age_restriction")

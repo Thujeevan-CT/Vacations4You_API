@@ -26,7 +26,7 @@ module.exports = {
                 },
                 date: {
                   type: "string(50)",
-                  default: "unix timestamp format",
+                  default: "String format",
                 },
                 age_restriction: {
                   type: "string(50)",
@@ -167,7 +167,7 @@ module.exports = {
                 },
                 date: {
                   type: "string(50)",
-                  default: "unix timestamp format",
+                  default: "String format",
                 },
                 age_restriction: {
                   type: "string(50)",
