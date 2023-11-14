@@ -27,7 +27,7 @@ router.get('/', middleware.authRole(['admin', 'staff', 'agent']), async (req, re
       whereCondition.duration = duration;
     }
     
-    const activities = await Holiday.find(whereCondition);
+    const packages = await Holiday.find(whereCondition);
 
     if (!packages) {
       return responseHandler.error(res, 'Packages not found!');
