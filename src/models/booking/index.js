@@ -24,6 +24,26 @@ const bookingSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  meal_preference: {
+    type: String,
+    required: false,
+  },
+  cabin: {
+    type: String,
+    required: false,
+  },
+  participants: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      age: {
+        type: Number,
+        required: true,
+      },
+    }
+  ],
   status: {
     type: String,
     enum: ['active', 'inactive'],

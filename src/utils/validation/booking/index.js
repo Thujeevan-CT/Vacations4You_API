@@ -3,14 +3,20 @@ const {
   productId,
   userId,
   totalPrice,
-  productTypeOptional
+  productTypeOptional,
+  mealPreference,
+  cabin,
+  participants
 } = require('../rules');
 
 exports.newBooking = [
   productType,
   productId,
   userId,
-  totalPrice
+  totalPrice,
+  mealPreference,
+  cabin,
+  participants
 ];
 
 exports.getBookings = [

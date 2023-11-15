@@ -6,6 +6,9 @@ exports.bookingResponse = (data) => {
     destination: data.destination,
     user: data.user,
     price: data.price,
+    meal_preference: data.meal_preference,
+    cabin: data.cabin,
+    participants: data.participants,
     status: data.status,
   };
 };
@@ -21,6 +24,9 @@ exports.allBookingsResponse = (data) => {
       destination: data.destination,
       user: data.user,
       price: data.price,
+      meal_preference: data.meal_preference,
+      cabin: data.cabin,
+      participants: data.participants,
       status: data.status,
     });
   });

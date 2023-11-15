@@ -9,7 +9,7 @@ const { bookingResponse, allBookingsResponse } = require('../../utils/resources/
 
 router.post('/', middleware.authRole(['agent']), validate(bookingValidation.newBooking), async (req, res) => {
   try {
-    const { product_type, product_id, user_id, total_price } = req.body;
+    const { product_type, product_id, user_id, total_price, meal_preference, cabin, participants } = req.body;
     let product;
     if (product_type === 'holiday') {
       product = await Holiday.findOne({ _id: product_id })
@@ -32,7 +32,10 @@ router.post('/', middleware.authRole(['agent']), validate(bookingValidation.newB
       product_type,
       product_id,
       user: user_id,
-      total_price
+      total_price,
+      meal_preference: meal_preference ? meal_preference : null,
+      cabin: cabin ? cabin : null,
+      participants: participants ? participants : null,
     });
     const data = await newBooking.save();
 
