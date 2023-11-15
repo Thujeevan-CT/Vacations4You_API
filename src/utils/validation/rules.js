@@ -231,3 +231,38 @@ exports.ageRestrictionOptional = body("age_restriction")
   .isInt()
   .withMessage('Age is a number!')
   .optional();
+
+exports.productType = body("product_type")
+  .notEmpty()
+  .withMessage("Product type should be provided!")
+  .custom((value) => {
+    if (value !== 'holiday' && value !== 'cruise' && value !== 'activity') {
+      throw new Error("Product type is not valid!");
+    };
+
+    return true;
+  });
+
+exports.productId = body("product_id")
+  .notEmpty()
+  .withMessage("Product type should be provided!");
+
+exports.userId = body("user_id")
+  .notEmpty()
+  .withMessage("Product type should be provided!");
+
+exports.totalPrice = body("total_price")
+  .notEmpty()
+  .withMessage("Total price should be provided!")
+  .isInt()
+  .withMessage('Total price must be a number!')
+
+exports.productTypeOptional = body("product_type")
+  .custom((value) => {
+    if (value !== 'holiday' && value !== 'cruise' && value !== 'activity') {
+      throw new Error("Product type is not valid!");
+    };
+
+    return true;
+  })
+  .optional();
