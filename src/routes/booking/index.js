@@ -48,18 +48,21 @@ router.post('/', middleware.authRole(['agent']), validate(bookingValidation.newB
 
 router.post('/', middleware.authRole(['admin', 'staff']), validate(bookingValidation.getBookings), async (req, res) => {
   try {
-    const { product_type } = req.query;
     const whereQuery = {};
-
-    if (product_type) {
+    const { product_type } = req.query;
+    
+    const page = parseInt(req.query.page) || 1; 
+    const pageSize = parseInt(req.query.page_size) || 100;
+    const skip = (page - 1) * pageSize;
+    
+    if (product_type) { 
       whereQuery.product_type = product_type;
     }
 
-    const bookings = await Booking.find(whereQuery);
-
+    const bookings = await Booking.find(whereQuery).skip(skip).limit(pageSize);
     if (!bookings) {
-      return responseHandler.error(res, 'Booking not found!');
-    }
+      return responseHandler.error(res, 'Bookings not found!');
+    };
 
     return responseHandler.success(res, allBookingsResponse(bookings), "Bookings retrieved successfully.");
   } catch (error) {

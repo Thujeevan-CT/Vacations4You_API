@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { randomBytes } = require("crypto");
-const DIR_PATH = ("../../../config");
+const DIR_PATH = require("../../../config")();
 
 const MAX_FILE_SIZE_BYTES = 2 * 1024 * 1024; // 2MB in bytes
 
@@ -29,8 +29,13 @@ module.exports = class FileUpload {
       }
     }
 
+    console.log(this.req)
+    
     const isFileUpload = !!this.req.files;
     const isBase64Data = !!this.req.body[this.fieldName];
+    
+    console.log('isFileUpload', isFileUpload)
+    console.log('isBase64Data', isBase64Data)
 
     if (isFileUpload) {
       const file = this.req.files[this.fieldName];
@@ -55,7 +60,7 @@ module.exports = class FileUpload {
       const mimeMatch = base64Data.match(/^data:(.*);base64,(.*)$/);
 
       if(!mimeMatch){
-        return ['Image is not valid!'];
+        return ['Image is not valid base 64 format! eg: data:image/jpeg;base64,...'];
       }
 
       if (!mimeMatch || !this.allowedMimeTypes.includes(mimeMatch[1])) {
@@ -98,8 +103,8 @@ module.exports = class FileUpload {
     const randomString = randomBytes(4).toString("hex");
     const fieldPath = `${this.imagePath}/${Date.now()}-${randomString}.${fileExtension}`;
 
-    if (!fs.existsSync(path.join(DIR_PATH(), this.imagePath))) {
-      fs.mkdirSync(path.join(DIR_PATH(), this.imagePath), {
+    if (!fs.existsSync(path.join(DIR_PATH, this.imagePath))) {
+      fs.mkdirSync(path.join(DIR_PATH, this.imagePath), {
         recursive: true,
       });
     }
@@ -108,7 +113,7 @@ module.exports = class FileUpload {
 
     try {
       const base64Buffer = Buffer.from(mimeMatch[2], "base64");
-      fs.writeFileSync(path.join(DIR_PATH(), fieldPath), base64Buffer);
+      fs.writeFileSync(path.join(DIR_PATH, fieldPath), base64Buffer);
       return { [this.fieldName]: uploadImageFieldAndPath };
     } catch (err) {
       return false;

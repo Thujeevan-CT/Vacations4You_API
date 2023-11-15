@@ -88,6 +88,18 @@ module.exports = {
             ]
           }
         },
+        {
+          name: "page_size",
+          in: "query",
+          description: "Page size",
+          type: "string",
+        },
+        {
+          name: "page",
+          in: "query",
+          description: "Page",
+          type: "string",
+        },
       ],
       responses: {
         200: {

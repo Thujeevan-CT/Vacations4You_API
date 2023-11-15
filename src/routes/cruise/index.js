@@ -31,9 +31,13 @@ router.get('/meals-cabins', middleware.authRole(['admin', 'staff']), async (req,
 
 router.get('/', middleware.authRole(['admin', 'staff', 'agent']), async (req, res) => {
   try {
-    const { cruise_duration, cruise_provider, departure_destination, arrival_destination, departure_date, arrival_date, cabin_class, min_price, max_price } = req.query;
     const whereCondition = {};
+    const { cruise_duration, cruise_provider, departure_destination, arrival_destination, departure_date, arrival_date, cabin_class, min_price, max_price } = req.query;
     
+    const page = parseInt(req.query.page) || 1; 
+    const pageSize = parseInt(req.query.page_size) || 100;
+    const skip = (page - 1) * pageSize;
+
     if (req.isAgent) {
       whereCondition.status = 'active';
     }
@@ -65,7 +69,7 @@ router.get('/', middleware.authRole(['admin', 'staff', 'agent']), async (req, re
       whereCondition.price = { ...whereCondition.price, $lte: parseInt(max_price) };
     }
 
-    const cruises = await Cruise.find(whereCondition);
+    const cruises = await Cruise.find(whereCondition).skip(skip).limit(pageSize);
     if (!cruises) {
       return responseHandler.error(res, 'Cruises not found!');
     };

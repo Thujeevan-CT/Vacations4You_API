@@ -11,8 +11,12 @@ const { getRandomNumber } = require('../../utils/helpers');
 
 router.get('/', middleware.authRole(['admin', 'staff', 'agent']), async (req, res) => {
   try {
-    const { price, rating } = req.query;
     const whereCondition = {};
+    const { price, rating } = req.query;
+
+    const page = parseInt(req.query.page) || 1; 
+    const pageSize = parseInt(req.query.page_size) || 100;
+    const skip = (page - 1) * pageSize;
 
     if (req.isAgent) {
       whereCondition.status = 'active';
@@ -24,7 +28,7 @@ router.get('/', middleware.authRole(['admin', 'staff', 'agent']), async (req, re
       whereCondition.rating = rating;
     }
     
-    const activities = await Activity.find(whereCondition);
+    const activities = await Activity.find(whereCondition).skip(skip).limit(pageSize);
     if (!activities) {
       return responseHandler.error(res, 'Activities not found!');
     };
