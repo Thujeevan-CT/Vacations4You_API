@@ -11,6 +11,10 @@ const cruiseReservationsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
   departure_destination: {
     type: String,
     required: true,

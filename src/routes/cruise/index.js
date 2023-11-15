@@ -31,14 +31,11 @@ router.get('/meals-cabins', middleware.authRole(['admin', 'staff']), async (req,
 
 router.get('/', middleware.authRole(['admin', 'staff', 'agent']), async (req, res) => {
   try {
-    const { price, cruise_duration, cruise_provider } = req.query;
+    const { cruise_duration, cruise_provider, departure_destination, arrival_destination, departure_date, arrival_date, cabin_class, min_price, max_price } = req.query;
     const whereCondition = {};
-
+    
     if (req.isAgent) {
       whereCondition.status = 'active';
-    }
-    if (price) {
-      whereCondition.price = price;
     }
     if (cruise_duration) {
       whereCondition.cruise_duration = cruise_duration;
@@ -46,7 +43,28 @@ router.get('/', middleware.authRole(['admin', 'staff', 'agent']), async (req, re
     if (cruise_provider) {
       whereCondition.cruise_provider = cruise_provider;
     }
-    
+    if (departure_destination) {
+      whereCondition.departure_destination = departure_destination;
+    }
+    if (arrival_destination) {
+      whereCondition.arrival_destination = arrival_destination;
+    }
+    if (departure_date) {
+      whereCondition.departure_date = departure_date;
+    }
+    if (arrival_date) {
+      whereCondition.arrival_date = arrival_date;
+    }
+    if (cabin_class) {
+      whereCondition.cabin_class = cabin_class;
+    }
+    if (min_price) {
+      whereCondition.price = { $gte: parseInt(min_price) };
+    }
+    if (max_price) {
+      whereCondition.price = { ...whereCondition.price, $lte: parseInt(max_price) };
+    }
+
     const cruises = await Cruise.find(whereCondition);
     if (!cruises) {
       return responseHandler.error(res, 'Cruises not found!');
@@ -82,7 +100,7 @@ router.get('/:id', middleware.authRole(['admin', 'staff', 'agent']), validate(cr
 
 router.post('/new', middleware.authRole(['admin', 'staff']), validate(cruiseValidation.newCruise), async (req, res) => {
   try {
-    const { title, departure_destination, arrival_destination, departure_date, arrival_date, cabin_class, cruise_duration, cruise_provider, price } = req.body;
+    const { title, description, departure_destination, arrival_destination, departure_date, arrival_date, cabin_class, cruise_duration, cruise_provider, price } = req.body;
 
     const alreadyHaveTitle = await Cruise.findOne({ title: title });
     if(alreadyHaveTitle) {
@@ -98,6 +116,7 @@ router.post('/new', middleware.authRole(['admin', 'staff']), validate(cruiseVali
 
     const newCruise = Cruise({
       title,
+      description,
       departure_destination,
       arrival_destination,
       departure_date,

@@ -2,6 +2,7 @@ exports.activityResponse = (data) => {
   return {
     id: data._id,
     activity_type: data.activity_type,
+    description: data.description,
     destination: data.destination,
     date: data.date,
     image: data.image,
@@ -19,6 +20,7 @@ exports.allActivitiesResponse = (data) => {
     response.push({
       id: data._id,
       activity_type: data.activity_type,
+      description: data.description,
       destination: data.destination,
       date: data.date,
       image: data.image,

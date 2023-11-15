@@ -2,6 +2,7 @@ exports.cruiseResponse = (data) => {
   return {
     id: data._id,
     title: data.title,
+    description: data.description,
     departure_destination: data.departure_destination,
     arrival_destination: data.arrival_destination,
     departure_date: data.departure_date,
@@ -22,6 +23,7 @@ exports.allCruisesResponse = (data) => {
     response.push({
       id: data._id,
       title: data.title,
+      description: data.description,
       departure_destination: data.departure_destination,
       arrival_destination: data.arrival_destination,
       departure_date: data.departure_date,

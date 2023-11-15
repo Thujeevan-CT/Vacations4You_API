@@ -59,7 +59,7 @@ router.get('/:id', middleware.authRole(['admin', 'staff', 'agent']), validate(ac
 
 router.post('/new', middleware.authRole(['admin', 'staff']), validate(activityValidation.newActivity), async (req, res) => {
   try {
-    const { activity_type, destination, price, date, age_restriction } = req.body;
+    const { activity_type, description, destination, price, date, age_restriction } = req.body;
 
     const alreadyHaveTitle = await Activity.findOne({ activity_type: activity_type });
     if(alreadyHaveTitle) {
@@ -75,6 +75,7 @@ router.post('/new', middleware.authRole(['admin', 'staff']), validate(activityVa
 
     const newActivity = Activity({
       activity_type,
+      description,
       destination,
       date,
       price,

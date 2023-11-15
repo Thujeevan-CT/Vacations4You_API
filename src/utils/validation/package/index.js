@@ -14,7 +14,7 @@ const {
 
 exports.newPackage = [
   title,
-  description,
+  descriptionOptional,
   destination,
   duration,
   noOfTravelers,

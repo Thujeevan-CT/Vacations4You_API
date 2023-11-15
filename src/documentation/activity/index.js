@@ -20,6 +20,10 @@ module.exports = {
                   type: "string(50)",
                   default: "title",
                 },
+                description: {
+                  type: "string(255)",
+                  default: "description",
+                },
                 destination: {
                   type: "string(50)",
                   default: "destination",
@@ -160,6 +164,10 @@ module.exports = {
                 activity_type: {
                   type: "string(50)",
                   default: "title",
+                },
+                description: {
+                  type: "string(255)",
+                  default: "description",
                 },
                 destination: {
                   type: "string(50)",

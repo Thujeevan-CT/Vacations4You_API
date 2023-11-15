@@ -3,6 +3,8 @@ const {
   title,
   titleOptional,
   price,
+  description,
+  descriptionOptional,
   cruiseDuration,
   cruiseProvider,
   cruiseProviderOptional,
@@ -27,7 +29,8 @@ exports.newCruise = [
   arrivalDestination,
   departureDate,
   arrivalDate,
-  cabinClass
+  cabinClass,
+  descriptionOptional
 ];
 
 exports.updateCruise = [
@@ -38,7 +41,8 @@ exports.updateCruise = [
   arrivalDestinationOptional,
   departureDateOptional,
   arrivalDateOptional,
-  cabinClassOptional
+  cabinClassOptional,
+  descriptionOptional
 ];
 
 exports.getSingleCruise = [

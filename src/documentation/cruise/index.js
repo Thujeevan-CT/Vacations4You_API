@@ -46,6 +46,10 @@ module.exports = {
                   type: "string(50)",
                   default: "title",
                 },
+                description: {
+                  type: "string(255)",
+                  default: "description",
+                },
                 departure_destination: {
                   type: "string(50)",
                   default: "departure destination",
@@ -111,21 +115,57 @@ module.exports = {
       description: "Get all cruise's",
       parameters: [
         {
-          name: "price",
+          name: "min_price",
           in: "query",
-          description: "price",
-          type: "string",
+          description: "minimum price",
+          type: "number",
+        },
+        {
+          name: "max_price",
+          in: "query",
+          description: "maximum price",
+          type: "number",
         },
         {
           name: "cruise_duration",
           in: "query",
-          description: "cruise_duration",
+          description: "cruise duration",
           type: "string",
         },
         {
           name: "cruise_provider",
           in: "query",
-          description: "cruise_provider",
+          description: "cruise provider",
+          type: "string",
+        },
+        {
+          name: "departure_destination",
+          in: "query",
+          description: "departure_destination",
+          type: "string",
+        },
+        {
+          name: "arrival_destination",
+          in: "query",
+          description: "arrival destination",
+          type: "string",
+        },
+        {
+          name: "departure_date",
+          in: "query",
+          description: "departure date",
+          type: "string",
+        },
+        {
+          name: "arrival_date",
+          in: "query",
+          description: "arrival date",
+          type: "string",
+        },
+        {
+          name: "cabin_class",
+          in: "query",
+          description: "cabin class",
           type: "string",
         },
       ],
@@ -208,6 +248,10 @@ module.exports = {
                 title: {
                   type: "string(50)",
                   default: "title",
+                },
+                description: {
+                  type: "string(255)",
+                  default: "description",
                 },
                 departure_destination: {
                   type: "string(50)",

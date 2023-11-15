@@ -21,7 +21,7 @@ module.exports = {
                   default: "title",
                 },
                 description: {
-                  type: "string(50)",
+                  type: "string(255)",
                   default: "description",
                 },
                 destination: {
