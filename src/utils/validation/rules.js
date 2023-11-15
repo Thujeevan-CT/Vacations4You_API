@@ -272,7 +272,6 @@ exports.mealPreference = body("meal_preference")
     if (value !== 'veg' && value !== 'non-veg') {
       throw new Error("meal preference is not valid!");
     };
-
     return true;
   })
   .optional();

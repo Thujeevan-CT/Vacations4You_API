@@ -2,6 +2,7 @@ const authDoc = require('./auth');
 const packageDoc = require('./package');
 const activityDoc = require('./activity');
 const cruiseDoc = require('./cruise');
+const bookingDoc = require('./booking');
 
 module.exports = {
   openapi: '3.0.3',
@@ -20,6 +21,7 @@ module.exports = {
     ...packageDoc,
     ...activityDoc, 
     ...cruiseDoc, 
+    ...bookingDoc, 
   },
   components: {
     securitySchemes: {

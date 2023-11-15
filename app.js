@@ -24,6 +24,8 @@ const activityRoute = require('./src/routes/activity');
 app.use('/api/v1/activity', activityRoute);
 const cruiseRoute = require('./src/routes/cruise');
 app.use('/api/v1/cruise', cruiseRoute);
+const bookingRoute = require('./src/routes/booking');
+app.use('/api/v1/book', bookingRoute);
 
 // Swagger API Documentation
 const swaggerUi = require("swagger-ui-express");
