@@ -46,7 +46,7 @@ router.post('/', middleware.authRole(['agent']), validate(bookingValidation.newB
   }
 });
 
-router.post('/', middleware.authRole(['admin', 'staff']), validate(bookingValidation.getBookings), async (req, res) => {
+router.get('/', middleware.authRole(['admin', 'staff']), validate(bookingValidation.getBookings), async (req, res) => {
   try {
     const whereQuery = {};
     const { product_type } = req.query;
