@@ -51,7 +51,7 @@ router.get('/', middleware.authRole(['admin', 'staff', 'agent']), validate(booki
     const whereQuery = {};
     const { product_type, user_id } = req.query;
 
-    if (isAgent && user_id === req.userId) {
+    if (req.isAgent && user_id === req.userId) {
       return responseHandler.forbidden(res);
     }
     
