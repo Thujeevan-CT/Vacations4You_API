@@ -13,7 +13,6 @@ exports.newBooking = [
   productType,
   productId,
   userId,
-  totalPrice,
   mealPreference,
   cabin,
   participants

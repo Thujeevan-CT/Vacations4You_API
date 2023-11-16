@@ -251,12 +251,6 @@ exports.userId = body("user_id")
   .notEmpty()
   .withMessage("Product type should be provided!");
 
-exports.totalPrice = body("total_price")
-  .notEmpty()
-  .withMessage("Total price should be provided!")
-  .isInt()
-  .withMessage('Total price must be a number!');
-
 exports.productTypeOptional = body("product_type")
   .custom((value) => {
     if (value !== 'holiday' && value !== 'cruise' && value !== 'activity') {
@@ -268,12 +262,6 @@ exports.productTypeOptional = body("product_type")
   .optional();
 
 exports.mealPreference = body("meal_preference")
-  .custom((value) => {
-    if (value !== 'veg' && value !== 'non-veg') {
-      throw new Error("meal preference is not valid!");
-    };
-    return true;
-  })
   .optional();
 
 exports.cabin = body("cabin")

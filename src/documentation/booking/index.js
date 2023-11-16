@@ -28,13 +28,9 @@ module.exports = {
                   type: "string(50)",
                   default: "id",
                 },
-                total_price: {
-                  type: "string(50)",
-                  default: "Number",
-                },
                 meal_preference: {
                   type: "string(50)",
-                  default: "'veg' or 'non-veg",
+                  default: "String",
                 },
                 cabin: {
                   type: "string(50)",
@@ -87,6 +83,12 @@ module.exports = {
               'activity',
             ]
           }
+        },
+        {
+          name: "user_id",
+          in: "query",
+          description: "User id",
+          type: "string",
         },
         {
           name: "page_size",

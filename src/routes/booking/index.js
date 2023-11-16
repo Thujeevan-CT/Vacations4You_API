@@ -9,7 +9,7 @@ const { bookingResponse, allBookingsResponse } = require('../../utils/resources/
 
 router.post('/', middleware.authRole(['agent']), validate(bookingValidation.newBooking), async (req, res) => {
   try {
-    const { product_type, product_id, user_id, total_price, meal_preference, cabin, participants } = req.body;
+    const { product_type, product_id, user_id, meal_preference, cabin, participants } = req.body;
     let product;
     if (product_type === 'holiday') {
       product = await Holiday.findOne({ _id: product_id })
@@ -32,7 +32,7 @@ router.post('/', middleware.authRole(['agent']), validate(bookingValidation.newB
       product_type,
       product_id,
       user: user_id,
-      total_price,
+      total_price: product.price,
       meal_preference: meal_preference ? meal_preference : null,
       cabin: cabin ? cabin : null,
       participants: participants ? participants : null,
@@ -46,10 +46,14 @@ router.post('/', middleware.authRole(['agent']), validate(bookingValidation.newB
   }
 });
 
-router.get('/', middleware.authRole(['admin', 'staff']), validate(bookingValidation.getBookings), async (req, res) => {
+router.get('/', middleware.authRole(['admin', 'staff', 'agent']), validate(bookingValidation.getBookings), async (req, res) => {
   try {
     const whereQuery = {};
-    const { product_type } = req.query;
+    const { product_type, user_id } = req.query;
+
+    if (isAgent && user_id === req.userId) {
+      return responseHandler.forbidden(res);
+    }
     
     const page = parseInt(req.query.page) || 1; 
     const pageSize = parseInt(req.query.page_size) || 100;
@@ -57,6 +61,9 @@ router.get('/', middleware.authRole(['admin', 'staff']), validate(bookingValidat
     
     if (product_type) { 
       whereQuery.product_type = product_type;
+    }
+    if (user_id) { 
+      whereQuery.user = user_id;
     }
 
     const bookings = await Booking.find(whereQuery).skip(skip).limit(pageSize);
