@@ -39,7 +39,7 @@ router.post('/', middleware.authRole(['agent']), validate(bookingValidation.newB
     });
     const data = await newBooking.save();
 
-    return responseHandler.success(res, bookingResponse(data), "Product booked successfully.");
+    return responseHandler.success(res, bookingResponse({ ...data._doc, product, user  }), "Product booked successfully.");
   } catch (error) {
     console.log(error);
     return responseHandler.serverError(res);
