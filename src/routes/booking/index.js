@@ -66,12 +66,40 @@ router.get('/', middleware.authRole(['admin', 'staff', 'agent']), validate(booki
       whereQuery.user = user_id;
     }
 
-    const bookings = await Booking.find(whereQuery).skip(skip).limit(pageSize);
+    const bookings = await Booking.find(whereQuery).populate(['user']).skip(skip).limit(pageSize);
     if (!bookings) {
       return responseHandler.error(res, 'Bookings not found!');
     };
 
-    return responseHandler.success(res, allBookingsResponse(bookings), "Bookings retrieved successfully.");
+    const responseData = [];
+    const productCache = {};
+
+    for (const data of bookings) {
+      if (data.product_type === 'cruise' || data.product_type === 'holiday' || data.product_type === 'activity') {
+        const productId = data.product_id;
+
+        if (!productCache[productId]) {
+          let product;
+          if (data.product_type === 'cruise') {
+            product = await Cruise.findById(productId);
+          } else if (data.product_type === 'holiday') {
+            product = await Holiday.findById(productId);
+          } else if (data.product_type === 'activity') {
+            console.log("Run")
+            product = await Activity.findById(productId);
+          }
+
+          if (product) {
+            responseData.push({ ...data._doc, product });
+            productCache[productId] = responseData[responseData.length - 1].product;
+          }
+        } else {
+          responseData.push({ ...data._doc, product: productCache[productId] });
+        }
+      }
+    }
+
+    return responseHandler.success(res, allBookingsResponse(responseData), "Bookings retrieved successfully.");
   } catch (error) {
     console.log(error);
     return responseHandler.serverError(res);
@@ -79,4 +107,3 @@ router.get('/', middleware.authRole(['admin', 'staff', 'agent']), validate(booki
 });
 
 module.exports = router;
-
