@@ -28,14 +28,9 @@ module.exports = class FileUpload {
         return [`${this.fieldName} is required!`];
       }
     }
-
-    console.log(this.req)
     
     const isFileUpload = !!this.req.files;
     const isBase64Data = !!this.req.body[this.fieldName];
-    
-    console.log('isFileUpload', isFileUpload)
-    console.log('isBase64Data', isBase64Data)
 
     if (isFileUpload) {
       const file = this.req.files[this.fieldName];

@@ -85,7 +85,6 @@ router.get('/', middleware.authRole(['admin', 'staff', 'agent']), validate(booki
           } else if (data.product_type === 'holiday') {
             product = await Holiday.findById(productId);
           } else if (data.product_type === 'activity') {
-            console.log("Run")
             product = await Activity.findById(productId);
           }
 
