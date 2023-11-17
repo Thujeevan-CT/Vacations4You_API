@@ -62,7 +62,7 @@ router.get('/', middleware.authRole(['admin', 'staff', 'agent']), validate(booki
     if (product_type) { 
       whereQuery.product_type = product_type;
     }
-    if (user_id) { 
+    if (req.isAgent && user_id) { 
       whereQuery.user = user_id;
     }
 
