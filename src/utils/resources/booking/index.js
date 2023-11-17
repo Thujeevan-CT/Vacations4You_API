@@ -33,6 +33,7 @@ exports.allBookingsResponse = (data) => {
         description: data.product.description,
         date: data.product.date,
         price: data.product.price,
+        age_restriction: data.product_type === 'activity' ? data.product.age_restriction : null,
         status: data.product.status,
       },
       destination: data.destination,
